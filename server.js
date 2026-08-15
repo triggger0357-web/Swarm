@@ -147,4 +147,4 @@ app.get('/', (req,res)=>{
   </script></body></html>`);
 });
 
-app.listen(3000,'0.0.0.0',()=>console.log('✅ FULL SWARM RUNNING http://localhost:3000'));
+app.listen(process.env.PORT || 3000,'0.0.0.0',()=>console.log('✅ FULL SWARM RUNNING http://localhost:process.env.PORT || 3000'));
