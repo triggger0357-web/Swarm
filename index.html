@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
 <title>Phone-Serve OS - davidingalls1-20</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
@@ -62,6 +64,14 @@ function go(){let u=document.getElementById('url').value;if(!u.startsWith('http'
 function showUsers(){fetch("http://127.0.0.1:8000/users").then(r=>r.json()).then(d=>alert("Total: "+d.total_signups+"\\n"+JSON.stringify(d.users.slice(-5), null, 2))).catch(()=>alert("Open gateway: 127.0.0.1:8000/users"));}
 track('visit','homepage');
 document.getElementById('liveStats').innerHTML="Your ID: "+userId+"<br>Gateway: davidingalls1-20 READY<br><a href='http://127.0.0.1:8000/users' target='_blank'>View All Users</a>";
+</script>
+
+<button id="installBtn" style="position:fixed;bottom:20px;left:20px;right:20px;background:#0f0;color:#000;padding:15px;border-radius:10px;font-weight:bold;display:none;z-index:999">📲 INSTALL APP - davidingalls1-20</button>
+<script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e)=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').style.display='block';});
+document.getElementById('installBtn').addEventListener('click', ()=>{deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')track('install','pwa');document.getElementById('installBtn').style.display='none';});});
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
 </html>
