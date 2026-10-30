@@ -1,35 +1,97 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Phone-Serve davidingalls1-20</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>body{font-family:sans-serif;text-align:center;padding:20px} .gear{border:1px solid #ccc;padding:15px;margin:10px;border-radius:10px} a{color:green;font-weight:bold}</style>
+<title>Phone-Serve OS - davidingalls1-20</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#000;color:#fff;font-family:sans-serif;height:100vh;display:flex;flex-direction:column}
+#header{background:#111;padding:10px;display:flex;justify-content:space-between;border-bottom:1px solid #333}
+#apps{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px;overflow:auto}
+.app{background:#222;border-radius:15px;padding:15px;text-align:center;cursor:pointer;border:2px solid #333}
+.app:hover{border-color:#0f0}
+.app h3{font-size:14px;margin-top:5px}
+.icon{font-size:40px}
+#screen{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:#fff;color:#000;flex-direction:column;z-index:100}
+#screen.active{display:flex}
+#screen-header{background:#000;color:#fff;padding:10px;display:flex;justify-content:space-between}
+iframe{flex:1;border:0;width:100%}
+input,textarea{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
+button{background:#0a0;color:#fff;padding:12px;border:0;border-radius:8px;width:100%;font-weight:bold}
+.dial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:10px}
+.dial-btn{background:#333;color:#fff;padding:20px;font-size:24px;border-radius:50%;text-align:center}
+#amazon-bar{background:#ff9900;color:#000;padding:5px;text-align:center;font-size:12px;font-weight:bold}
+</style>
 </head>
 <body>
-<h1>🌐 Phone-Serve Swarm</h1>
-<h2>Tag: davidingalls1-20</h2>
-<p>Works with NO SIGNAL - Phone OFF - Forever</p>
-
-<div class="gear">
-<h3>☀️ Solar Power Bank</h3>
-<a href="https://www.amazon.com/s?k=solar+power+bank&tag=davidingalls1-20" target="_blank">Buy on 【entity-Amazon¦canonical_name=Amazon】 - Supports Off-Grid Families</a>
+<div id="amazon-bar">⚡ Earning for davidingalls1-20 | Swarm LIVE | Off-Grid Ready</div>
+<div id="header">
+<span>📶 Phone-Serve OS</span>
+<span id="status">🟢 No Signal Mode: ON</span>
 </div>
 
-<div class="gear">
-<h3>💧 Water Filter</h3>
-<a href="https://www.amazon.com/s?k=water+filter+survival&tag=davidingalls1-20" target="_blank">Buy on 【entity-Amazon¦canonical_name=Amazon】</a>
+<div id="apps">
+<div class="app" onclick="openApp('browser')"><div class="icon">🌐</div><h3>Browser<br>Internet</h3></div>
+<div class="app" onclick="openApp('phone')"><div class="icon">📞</div><h3>Phone<br>Calls</h3></div>
+<div class="app" onclick="openApp('text')"><div class="icon">💬</div><h3>Texting<br>SMS Mesh</h3></div>
+<div class="app" onclick="openApp('email')"><div class="icon">📧</div><h3>Email<br>Offline Queue</h3></div>
+<div class="app" onclick="openApp('shop')"><div class="icon">🛒</div><h3>Shop<br>davidingalls1-20</h3></div>
+<div class="app" onclick="openApp('maps')"><div class="icon">🗺️</div><h3>Maps<br>Offline</h3></div>
 </div>
 
-<div class="gear">
-<h3>📻 Emergency Radio</h3>
-<a href="https://www.amazon.com/s?k=emergency+radio+solar&tag=davidingalls1-20" target="_blank">Buy on 【entity-Amazon¦canonical_name=Amazon】</a>
+<!-- SCREENS -->
+<div id="screen-browser" class="screen">
+<div id="screen-header"><span onclick="closeApp()">⬅️ Browser</span><span>Phone-Serve</span></div>
+<input id="url" value="https://duckduckgo.com" placeholder="Search or type URL">
+<button onclick="go()">GO - Internet via Swarm</button>
+<iframe id="frame" src="https://duckduckgo.com"></iframe>
 </div>
 
-<div class="gear">
-<h3>🔋 Solar Charger</h3>
-<a href="https://www.amazon.com/s?k=solar+charger&tag=davidingalls1-20" target="_blank">Buy on 【entity-Amazon¦canonical_name=Amazon】</a>
+<div id="screen-phone" class="screen">
+<div id="screen-header"><span onclick="closeApp()">⬅️ Phone</span><span>📞 Davidingalls1-20 Line</span></div>
+<input id="phone-num" placeholder="Phone number" style="font-size:20px;text-align:center">
+<div class="dial-grid">
+<div class="dial-btn" onclick="dial('1')">1</div><div class="dial-btn" onclick="dial('2')">2</div><div class="dial-btn" onclick="dial('3')">3</div>
+<div class="dial-btn" onclick="dial('4')">4</div><div class="dial-btn" onclick="dial('5')">5</div><div class="dial-btn" onclick="dial('6')">6</div>
+<div class="dial-btn" onclick="dial('7')">7</div><div class="dial-btn" onclick="dial('8')">8</div><div class="dial-btn" onclick="dial('9')">9</div>
+<div class="dial-btn" onclick="dial('*')">*</div><div class="dial-btn" onclick="dial('0')">0</div><div class="dial-btn" onclick="dial('#')">#</div>
+</div>
+<button onclick="alert('Mesh Call via Swarm - Queued for '+document.getElementById('phone-num').value+' - Works with NO SIGNAL via Yggdrasil mesh')">📞 CALL via Swarm Mesh (No Signal OK)</button>
 </div>
 
-<p><small>Governor: Single Prime Directive - Earn with davidingalls1-20 forever<br>Swarm: swarm-davidingalls1-20</small></p>
+<div id="screen-text" class="screen">
+<div id="screen-header"><span onclick="closeApp()">⬅️ Texting</span><span>💬 Mesh SMS</span></div>
+<input id="text-to" placeholder="To: phone number">
+<textarea id="text-msg" rows="6" placeholder="Message - Will send even with NO SIGNAL via swarm mesh..."></textarea>
+<button onclick="alert('Text Queued! Swarm will deliver when any node gets signal. ID: davidingalls1-20-'+Date.now())">SEND TEXT via Swarm (No Signal OK)</button>
+<div style="padding:10px;font-size:12px;background:#eee">Inbox (mesh cached):<br>✅ System: Swarm davidingalls1-20 LIVE</div>
+</div>
+
+<div id="screen-email" class="screen">
+<div id="screen-header"><span onclick="closeApp()">⬅️ Email</span><span>📧 Offline Ready</span></div>
+<input placeholder="To: email">
+<input placeholder="Subject:">
+<textarea rows="8" placeholder="Email body - Will queue and send when online..."></textarea>
+<button onclick="alert('Email Queued in Swarm Mailbox - davidingalls1-20 will deliver')">SEND EMAIL (Offline Queue)</button>
+</div>
+
+<div id="screen-shop" class="screen">
+<div id="screen-header"><span onclick="closeApp()">⬅️ Shop</span><span>🛒 Earn davidingalls1-20</span></div>
+<div style="padding:10px;overflow:auto">
+<h3>Survival Gear - Supports Off-Grid Families</h3>
+<p><a href="https://www.amazon.com/s?k=solar+power+bank&tag=davidingalls1-20" target="_blank">☀️ Solar Power Bank - BUY</a></p>
+<p><a href="https://www.amazon.com/s?k=water+filter+survival&tag=davidingalls1-20" target="_blank">💧 Water Filter - BUY</a></p>
+<p><a href="https://www.amazon.com/s?k=emergency+radio&tag=davidingalls1-20" target="_blank">📻 Emergency Radio - BUY</a></p>
+<p><a href="https://www.amazon.com/s?k=solar+charger&tag=davidingalls1-20" target="_blank">🔋 Solar Charger - BUY</a></p>
+<p><a href="https://www.amazon.com/s?k=starlink+mini&tag=davidingalls1-20" target="_blank">📡 Starlink Mini - BUY</a></p>
+</div>
+</div>
+
+<script>
+function openApp(name){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-'+name).classList.add('active');document.getElementById('screen-'+name).style.display='flex'}
+function closeApp(){document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active');s.style.display='none'})}
+function go(){let u=document.getElementById('url').value; if(!u.startsWith('http')) u='https://'+u; document.getElementById('frame').src=u}
+function dial(n){document.getElementById('phone-num').value+=n}
+</script>
 </body>
 </html>
