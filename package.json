@@ -1,8 +1,7 @@
 {
   "name": "swarm-davidingalls1-20",
   "version": "1.0.0",
-  "type": "commonjs",
   "main": "server.js",
   "scripts": { "start": "node server.js" },
-  "dependencies": { "express": "^4.18.2" }
+  "dependencies": { "express": "^4.18.2", "node-fetch": "^3.3.2" }
 }
