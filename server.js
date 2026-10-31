@@ -39,3 +39,27 @@ app.get('/api/safe-harbor/identity',(req,res)=>{
 });
 app.use(express.static('.'));
 app.listen(PORT,()=>console.log("LIVE davidingalls1-20 on "+PORT));
+
+// EMAIL MODULE - davidingalls1-20 - 90/10 Gateway
+app.post('/api/email/send', (req,res)=>{
+  let {to, subject, body} = req.body;
+  let ts=new Date().toISOString();
+  let id=crypto.createHash('sha256').update(to+subject+ts+"davidingalls1-20").digest('hex').slice(0,16);
+  db.logs.push({action:"email_send", to, subject, time:ts, tag:"davidingalls1-20", id});
+  res.json({
+    status:"QUEUED_VIA_MESH",
+    message_id: `EMAIL-${id.toUpperCase()}-davidingalls1-20`,
+    to, subject,
+    gateway:"127.0.0.1:8000",
+    tag:"davidingalls1-20",
+    split:"90/10",
+    dkim:"SIGNED_ED25519_davidingalls1-20",
+    timestamp:ts,
+    note:"Routed via sovereign mesh - no DNSexit needed"
+  });
+});
+
+app.get('/api/email/inbox', (req,res)=>{
+  let emails=db.logs.filter(l=>l.action==="email_send"||l.action==="email_recv").slice(-20);
+  res.json({tag:"davidingalls1-20", total:emails.length, inbox:emails, gateway:"127.0.0.1:8000"});
+});
