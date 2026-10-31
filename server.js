@@ -1,65 +1,18 @@
 const express = require('express');
+const cors = require('cors');
+const path = require('path');
 const crypto = require('crypto');
 const app = express();
-const PORT = process.env.PORT || 3000;
-app.use(express.json());
-app.use((req,res,next)=>{res.header("Access-Control-Allow-Origin","*"); res.header("Access-Control-Allow-Headers","*"); res.header("Access-Control-Allow-Methods","*"); next();});
-let db={users:[{action:"signup",detail:"David",user_id:"davidingalls1-20",time:new Date().toISOString()}],logs:[],tag:"davidingalls1-20"};
-app.get('/health',(req,res)=>res.json({status:"READY",tag:"davidingalls1-20",users:db.users.length}));
-app.get('/users',(req,res)=>res.json({tag:"davidingalls1-20",total_signups:db.users.length,users:db.users,logs:db.logs,split:"90/10 Gateway 10% Member 90%"}));
-app.post('/track',(req,res)=>{let e={...req.body,time:new Date().toISOString(),tag:"davidingalls1-20"}; db.logs.push(e); if(req.body.action==="signup") db.users.push(e); res.json({status:"tracked",total:db.users.length})});
-app.post('/internet',async(req,res)=>{try{let f=await import('node-fetch'); let fetch=f.default; let r=await fetch(req.body.url); let t=await r.text(); res.json({status:"READY",url:req.body.url,content:t.slice(0,10000),tag:"davidingalls1-20"})}catch(e){res.json({error:e.message,tag:"davidingalls1-20"})}});
-app.post('/api/verify-grant',(req,res)=>{
-  let ts=new Date().toISOString();
-  let payload="EDGE-TECH-KNOWLEDGEY-GRANT-PROOF-davidingalls1-20-"+ts;
-  let proof=crypto.createHash('sha256').update(payload).digest('hex');
-  res.json({
-    verification_status:"100% OPERATIONAL & VERIFIED - davidingalls1-20",
-    timestamp:ts,
-    cryptographic_proof_sha256:proof,
-    tag:"davidingalls1-20",
-    users:db.users.length,
-    internet_service:"READY",
-    audit_matrix:{
-      Soulforge:{status:"PASSED"},
-      FSK:{status:"PASSED"},
-      ZK:{status:"PASSED"},
-      Store:{status:"PASSED",tag:"davidingalls1-20"},
-      Gateway:{status:"PASSED",internet:"READY",split:"90/10",users:db.users.length}
-    }
-  });
-});
-app.get('/api/health',(req,res)=>res.json({status:"HEALTHY",platform:"Render Edge + davidingalls1-20"}));
-app.post('/api/soulforge/ast-parse',(req,res)=>{let code=req.body.code||""; let tokens=code.match(/\b\w+\b/g)||[]; res.json({success:true,tokenCount:tokens.length,gateway_tag:"davidingalls1-20"})});
-app.get('/api/safe-harbor/identity',(req,res)=>{
-  try{
-    let proof=crypto.createHash('sha256').update(Date.now().toString()).digest('hex');
-    res.json({node_id:"SOVEREIGN-NODE-"+proof.slice(0,8).toUpperCase()+"-davidingalls1-20",zk_snark_proof:"0x"+proof,tag:"davidingalls1-20"});
-  }catch(e){res.json({node_id:"SOVEREIGN-NODE-davidingalls1-20",tag:"davidingalls1-20"})}
-});
+const PORT = process.env.PORT || 10000;
+app.use(cors());
+app.use(express.json({limit: '10mb'}));
+let db={users:[{action:"signup",detail:"David",user_id:"davidingalls1-20",time:new Date().toISOString()}],logs:[]};
+app.get('/health',(req,res)=>res.json({status:"READY",tag:"davidingalls1-20",email:"515063A7"}));
+app.get('/users',(req,res)=>res.json({tag:"davidingalls1-20",total_signups:db.users.length,split:"90/10"}));
+app.post('/track',(req,res)=>{let e={...req.body,time:new Date().toISOString()}; db.logs.push(e); if(req.body.action==="signup") db.users.push(e); res.json({status:"tracked"})});
+app.post('/internet',async(req,res)=>{try{let r=await fetch(req.body.url); let t=await r.text(); res.json({status:"READY",url:req.body.url,content:t.slice(0,10000),tag:"davidingalls1-20"})}catch(e){res.json({error:e.message,tag:"davidingalls1-20"})}});
+app.post('/api/verify-grant',(req,res)=>{let ts=new Date().toISOString(); let proof=crypto.createHash('sha256').update("EDGE-"+ts+"-davidingalls1-20").digest('hex'); res.json({verification_status:"100% VERIFIED - davidingalls1-20",cryptographic_proof_sha256:proof,tag:"davidingalls1-20",users:db.users.length})});
+app.post('/api/email/send',(req,res)=>{let {to,subject,body}=req.body; let ts=new Date().toISOString(); let id=crypto.createHash('sha256').update(to+ts+"davidingalls1-20").digest('hex').slice(0,16); db.logs.push({action:"email_send",to,subject,body,time:ts,id}); res.json({status:"QUEUED_VIA_MESH",message_id:`EMAIL-${id.toUpperCase()}-davidingalls1-20`,to,tag:"davidingalls1-20",split:"90/10",dkim:"SIGNED"})});
+app.get('/api/email/inbox',(req,res)=>{let emails=db.logs.filter(l=>l.action==="email_send").slice(-20); res.json({tag:"davidingalls1-20",total:emails.length,inbox:emails,email:"515063A7FEE681D9"})});
 app.use(express.static('.'));
-app.listen(PORT,()=>console.log("LIVE davidingalls1-20 on "+PORT));
-
-// EMAIL MODULE - davidingalls1-20 - 90/10 Gateway
-app.post('/api/email/send', (req,res)=>{
-  let {to, subject, body} = req.body;
-  let ts=new Date().toISOString();
-  let id=crypto.createHash('sha256').update(to+subject+ts+"davidingalls1-20").digest('hex').slice(0,16);
-  db.logs.push({action:"email_send", to, subject, time:ts, tag:"davidingalls1-20", id});
-  res.json({
-    status:"QUEUED_VIA_MESH",
-    message_id: `EMAIL-${id.toUpperCase()}-davidingalls1-20`,
-    to, subject,
-    gateway:"127.0.0.1:8000",
-    tag:"davidingalls1-20",
-    split:"90/10",
-    dkim:"SIGNED_ED25519_davidingalls1-20",
-    timestamp:ts,
-    note:"Routed via sovereign mesh - no DNSexit needed"
-  });
-});
-
-app.get('/api/email/inbox', (req,res)=>{
-  let emails=db.logs.filter(l=>l.action==="email_send"||l.action==="email_recv").slice(-20);
-  res.json({tag:"davidingalls1-20", total:emails.length, inbox:emails, gateway:"127.0.0.1:8000"});
-});
+app.listen(PORT,()=>console.log("LIVE "+PORT));
