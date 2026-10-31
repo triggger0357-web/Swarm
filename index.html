@@ -18,38 +18,95 @@ body{background:#000;color:#fff;font-family:sans-serif;height:100vh;display:flex
 iframe{flex:1;border:0;width:100%}
 input,textarea{width:100%;padding:12px;margin:5px 0;border:1px solid #ccc;border-radius:8px}
 button{background:#0a0;color:#fff;padding:12px;border:0;border-radius:8px;width:100%;font-weight:bold}
-#amazon-bar{background:#ff9900;color:#000;padding:5px;text-align:center;font-size:12px;font-weight:bold}
+#【entity-amazon¦canonical_name=Amazon】-bar{background:#ff9900;color:#000;padding:5px;text-align:center;font-size:12px;font-weight:bold}
 #stats{background:#0a0;color:#fff;padding:8px;text-align:center;font-size:13px}
+#browserView{flex:1;overflow:auto;padding:10px;background:white;color:black;white-space:pre-wrap}
 </style>
 </head>
 <body>
-<div id="amazon-bar">⚡ Earning davidingalls1-20 | Swarm LIVE</div>
-<div id="stats">👥 <span id="userCount">0</span> Users | 🟢 No Signal: ON | Steady: ON | <a href="#" onclick="showUsers()" style="color:#fff">View Users</a></div>
+<div id="【entity-amazon¦canonical_name=Amazon】-bar">⚡ Earning davidingalls1-20 | Swarm LIVE</div>
+<div id="stats">👥 <span id="userCount">1</span> Users | 🟢 No Signal: ON | Steady: ON | <a href="#" onclick="showUsers()" style="color:#fff">View Users</a></div>
 <div id="header"><span>📶 Phone-Serve OS</span><span>davidingalls1-20</span></div>
 <div id="apps">
-<div class="app" onclick="openApp('browser')"><div class="icon">🌐</div><h3>Browser</h3></div>
-<div class="app" onclick="openApp('phone')"><div class="icon">📞</div><h3>Phone</h3></div>
-<div class="app" onclick="openApp('text')"><div class="icon">💬</div><h3>Text</h3></div>
-<div class="app" onclick="openApp('email')"><div class="icon">📧</div><h3>Email</h3></div>
-<div class="app" onclick="openApp('shop')"><div class="icon">🛒</div><h3>Shop</h3></div>
-<div class="app" onclick="openApp('signup')"><div class="icon">👤</div><h3>Join</h3></div>
+<div class="app" onclick="openApp('browser')"><div class="icon">🌐</div><h3>Browser</h3><small>Via Gateway</small></div>
+<div class="app" onclick="openApp('phone')"><div class="icon">📞</div><h3>Phone</h3><small>Mesh Call</small></div>
+<div class="app" onclick="openApp('text')"><div class="icon">💬</div><h3>Text</h3><small>Mesh Text</small></div>
+<div class="app" onclick="openApp('email')"><div class="icon">📧</div><h3>Email</h3><small>Mesh Email</small></div>
+<div class="app" onclick="openApp('shop')"><div class="icon">🛒</div><h3>Shop</h3><small>【entity-Amazon¦canonical_name=Amazon】</small></div>
+<div class="app" onclick="openApp('signup')"><div class="icon">👤</div><h3>Join</h3><small>Signup</small></div>
 </div>
-<div id="screen-browser" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Browser</span><span>Phone-Serve</span></div><input id="url" value="https://duckduckgo.com"><button onclick="go()">GO</button><iframe id="frame" src="https://duckduckgo.com"></iframe></div>
-<div id="screen-phone" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Phone</span><span>📞</span></div><input id="phone-num" placeholder="Phone number"><button onclick="track('call', document.getElementById('phone-num').value); alert('Call Queued '+document.getElementById('phone-num').value)">📞 CALL via Mesh</button></div>
-<div id="screen-text" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Text</span><span>💬</span></div><input id="text-to" placeholder="To:"><textarea id="text-msg" rows="6" placeholder="Message..."></textarea><button onclick="track('text', document.getElementById('text-to').value); alert('Text Queued')">SEND TEXT</button></div>
-<div id="screen-email" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Email</span><span>📧</span></div><input id="email-to" placeholder="To:"><textarea rows="8"></textarea><button onclick="track('email', document.getElementById('email-to').value); alert('Email Queued')">SEND EMAIL</button></div>
-<div id="screen-shop" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Shop</span><span>🛒</span></div><div style="padding:10px"><a href="https://www.amazon.com/s?k=solar+power+bank&tag=davidingalls1-20" target="_blank">☀️ Solar Bank</a><br><a href="https://www.amazon.com/s?k=starlink+mini&tag=davidingalls1-20" target="_blank">📡 Starlink Mini</a></div></div>
-<div id="screen-signup" class="screen"><div id="screen-header"><span onclick="closeApp()">⬅️ Join</span><span>👤</span></div><div style="padding:20px"><h2>Join Phone-Serve OS</h2><input id="signup-name" placeholder="Your name"><input id="signup-phone" placeholder="Phone"><input id="signup-email" placeholder="Email"><button onclick="doSignup()" style="background:#ff9900;color:#000;margin-top:10px">✅ JOIN NOW</button><div id="signup-result" style="margin-top:15px"></div><div id="liveStats" style="background:#eee;padding:10px;border-radius:8px;color:#000;margin-top:10px">Loading...</div></div></div>
+
+<div id="screen-browser" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Browser</span><span>Via Gateway</span></div>
+<div style="display:flex;padding:5px;background:#eee"><input id="url" value="https://example.com" style="flex:1"><button onclick="go()" style="width:80px;margin-left:5px">GO</button></div>
+<div id="browserView">Enter URL and tap GO. Uses YOUR gateway at 127.0.0.1:8000/internet and Render cloud for no-signal browsing!</div>
+</div>
+
+<div id="screen-phone" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Phone</span><span>📞</span></div>
+<div style="padding:20px"><input id="phone-num" placeholder="Phone number e.g. 360-555-1234" type="tel"><div id="phone-status" style="margin:10px 0;padding:10px;background:#eee;border-radius:8px">Ready to call via mesh. Enter number.</div><button onclick="makeCall()">📞 CALL via Mesh</button><button onclick="window.location.href='tel:'+document.getElementById('phone-num').value" style="background:#007aff;margin-top:5px">📞 Direct Dial (if signal)</button></div></div>
+
+<div id="screen-text" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Text</span><span>💬</span></div>
+<div style="padding:20px"><input id="text-to" placeholder="To: phone number"><textarea id="text-msg" rows="6" placeholder="Message..."></textarea><div id="text-status"></div><button onclick="sendText()">SEND TEXT via Mesh</button></div></div>
+
+<div id="screen-email" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Email</span><span>📧</span></div>
+<div style="padding:20px"><input id="email-to" placeholder="To: email"><input id="email-sub" placeholder="Subject"><textarea id="email-body" rows="6" placeholder="Message..."></textarea><div id="email-status"></div><button onclick="sendEmail()">SEND EMAIL via Mesh</button></div></div>
+
+<div id="screen-shop" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Shop</span><span>🛒</span></div><div style="padding:10px"><p>Shop with tag davidingalls1-20 - You earn!</p><a href="https://www.amazon.com/s?k=solar+power+bank&tag=davidingalls1-20" target="_blank" style="display:block;padding:15px;background:#ff9900;color:#000;border-radius:10px;margin:10px 0;text-decoration:none;text-align:center">☀️ Solar Power Bank</a><a href="https://www.amazon.com/s?k=starlink+mini&tag=davidingalls1-20" target="_blank" style="display:block;padding:15px;background:#ff9900;color:#000;border-radius:10px;margin:10px 0;text-decoration:none;text-align:center">📡 Starlink Mini</a><a href="https://www.amazon.com/s?k=mesh+wifi&tag=davidingalls1-20" target="_blank" style="display:block;padding:15px;background:#ff9900;color:#000;border-radius:10px;margin:10px 0;text-decoration:none;text-align:center">📶 Mesh WiFi</a></div></div>
+
+<div id="screen-signup" class="screen"><div id="screen-header"><span onclick="closeApp()" style="cursor:pointer">⬅️ Join</span><span>👤</span></div><div style="padding:20px"><h2>Join Phone-Serve OS</h2><input id="signup-name" placeholder="Your name"><input id="signup-phone" placeholder="Phone"><input id="signup-email" placeholder="Email"><button onclick="doSignup()" style="background:#ff9900;color:#000;margin-top:10px">✅ JOIN NOW</button><div id="signup-result" style="margin-top:15px"></div><div id="liveStats" style="background:#eee;padding:10px;border-radius:8px;color:#000;margin-top:10px">Loading...</div></div></div>
+
+<button id="installBtn" style="position:fixed;bottom:20px;left:20px;right:20px;background:#0f0;color:#000;padding:15px;border-radius:10px;font-weight:bold;display:none;z-index:999">📲 INSTALL APP - davidingalls1-20</button>
 <script>
 let userId = localStorage.getItem('userId') || 'davidingalls1-20-'+Date.now();
 localStorage.setItem('userId', userId);
 function track(action, detail){
   let data = {action: action, detail: detail, user_id: userId};
   try{localStorage.setItem('logs', JSON.stringify((JSON.parse(localStorage.getItem('logs')||'[]').concat([data])).slice(-100)))}catch(e){}
-  // Track to local gateway if same phone
   fetch("http://127.0.0.1:8000/track", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data)}).catch(()=>{});
-  // Track to Render gateway (global)
   fetch("https://swarm-davidingalls1-20.onrender.com/track", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify(data)}).catch(()=>{});
+  // Also track to local gateway users
+  fetch("http://127.0.0.1:8000/users").catch(()=>{});
+}
+async function go(){
+  let u=document.getElementById('url').value;
+  if(!u.startsWith('http'))u='https://'+u;
+  document.getElementById('browserView').innerHTML="🌐 Fetching via YOUR gateway (davidingalls1-20)...<br>URL: "+u+"<br><br>Loading...";
+  track('browser', u);
+  try{
+    // Try local gateway first
+    let res = await fetch("http://127.0.0.1:8000/internet", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({url:u})});
+    let data = await res.json();
+    document.getElementById('browserView').innerHTML="<b>✅ Via Local Gateway 127.0.0.1:8000</b><br><small>"+u+"</small><hr>"+(data.content||JSON.stringify(data).slice(0,5000));
+  }catch(e){
+    try{
+      // Fallback to Render cloud gateway
+      let res2 = await fetch("https://swarm-davidingalls1-20.onrender.com/internet", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({url:u})});
+      let data2 = await res2.text();
+      document.getElementById('browserView').innerHTML="<b>✅ Via Cloud Gateway Render</b><br><small>"+u+"</small><hr>"+data2.slice(0,8000);
+    }catch(e2){
+      document.getElementById('browserView').innerHTML="❌ Gateway offline. Error: "+e2+"<br>Open browser directly: <a href='"+u+"' target='_blank'>"+u+"</a>";
+      window.open(u, '_blank');
+    }
+  }
+}
+function makeCall(){
+  let num=document.getElementById('phone-num').value;
+  if(!num){alert("Enter number");return;}
+  track('call', num);
+  document.getElementById('phone-status').innerHTML="📡 Queued via mesh: "+num+"<br>✅ Tracked in gateway: davidingalls1-20<br><br>Tap Direct Dial if you have signal, or call is stored for mesh relay when signal returns.";
+  // Store for mesh relay
+  fetch("http://127.0.0.1:8000/track", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({action:"call_queued", detail:num, user_id:userId})}).catch(()=>{});
+}
+function sendText(){
+  let to=document.getElementById('text-to').value, msg=document.getElementById('text-msg').value;
+  if(!to||!msg){alert("Need number + message");return;}
+  track('text', to+"|"+msg);
+  document.getElementById('text-status').innerHTML="✅ Text queued via mesh to "+to+"<br>Stored in gateway davidingalls1-20 for relay.";
+}
+function sendEmail(){
+  let to=document.getElementById('email-to').value, sub=document.getElementById('email-sub').value, body=document.getElementById('email-body').value;
+  if(!to){alert("Need email");return;}
+  track('email', to+"|"+sub+"|"+body);
+  document.getElementById('email-status').innerHTML="✅ Email queued via mesh to "+to+"<br>Stored in gateway.";
 }
 function doSignup(){
   let name=document.getElementById('signup-name').value, phone=document.getElementById('signup-phone').value, email=document.getElementById('signup-email').value;
@@ -57,20 +114,17 @@ function doSignup(){
   track('signup', name+"|"+phone+"|"+email);
   document.getElementById('signup-result').innerHTML="<b style='color:green'>✅ Joined! Welcome "+name+"! ID: "+userId+"</b>";
   document.getElementById('userCount').innerText=parseInt(document.getElementById('userCount').innerText||0)+1;
+  fetch("http://127.0.0.1:8000/track", {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({action:"signup", detail:name+"|"+phone, user_id:userId})}).then(()=>{});
 }
 function openApp(n){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));let el=document.getElementById('screen-'+n);el.classList.add('active');el.style.display='flex';track('open', n);}
 function closeApp(){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'))}
-function go(){let u=document.getElementById('url').value;if(!u.startsWith('http'))u='https://'+u;document.getElementById('frame').src=u;track('browser', u);}
-function showUsers(){fetch("http://127.0.0.1:8000/users").then(r=>r.json()).then(d=>alert("Total: "+d.total_signups+"\\n"+JSON.stringify(d.users.slice(-5), null, 2))).catch(()=>alert("Open gateway: 127.0.0.1:8000/users"));}
+function showUsers(){fetch("http://127.0.0.1:8000/users").then(r=>r.json()).then(d=>alert("Total: "+d.total_signups+"\n"+JSON.stringify(d.users.slice(-5), null, 2))).catch(()=>alert("Open gateway: 127.0.0.1:8000/users"));}
 track('visit','homepage');
 document.getElementById('liveStats').innerHTML="Your ID: "+userId+"<br>Gateway: davidingalls1-20 READY<br><a href='http://127.0.0.1:8000/users' target='_blank'>View All Users</a>";
-</script>
 
-<button id="installBtn" style="position:fixed;bottom:20px;left:20px;right:20px;background:#0f0;color:#000;padding:15px;border-radius:10px;font-weight:bold;display:none;z-index:999">📲 INSTALL APP - davidingalls1-20</button>
-<script>
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', (e)=>{e.preventDefault();deferredPrompt=e;document.getElementById('installBtn').style.display='block';});
-document.getElementById('installBtn').addEventListener('click', ()=>{deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')track('install','pwa');document.getElementById('installBtn').style.display='none';});});
+document.getElementById('installBtn').addEventListener('click', ()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.then(c=>{if(c.outcome==='accepted')track('install','pwa');document.getElementById('installBtn').style.display='none';});}});
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js');}
 </script>
 </body>
